@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>todo</title>
+    <script src="./vue.js"></script>
+    <style>
+        .rulb {
+            font-weight: bold;
+            font-size: 20px;
+        }
+
+        .rwnr {
+            margin-left: 50px;
+        }
+
+        button {
+            margin-left: 50px;
+        }
+
+        .editname {
+            display: none;
+        }
+
+        .red {
+            color: pink;
+        }
+
+        .none {
+            display: block;
+        }
+
+        .decoration {
+            /* text-decoration: palevioletred; */
+            text-decoration: line-through;
+            color: red;
+        }
+
+        .editing .editname {
+            display: block;
+        }
+
+        .editing .rwmc {
+            display: none;
+        }
+
+        .editing button {
+            display: none;
+        }
+
+        .editing input[type="checkbox"] {
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <span class="lable_span">添加任务</span>
+        <input name="title" v-on:keyup.13="add" v-model="todo" />
+
+        <h2>列表未完成任务
+            <button>所有任务</button>
+            <button>未完成任务</button>
+            <button>完成任务</button>
+        </h2>
+        <ul>
+            <div class="rulb">任务列表</div>
+            <i class="red" v-show="!list.length">还没有添加任何任务</i>
+            <li v-for="item,index in list" :class="{decoration:item.ischeckd,editing:item===enterTodos}">
+                <input class="editname"  v-model="item.title" />
+                <!-- v-on:keyup.13="editSuccess(enterTodos)" -->
+                <input type="checkbox" v-model="item.ischeckd" />
+                <span class="rwmc" @dblclick="edit(item)">{{item.title}}</span>
+                <!-- <span class="rwnr">任务详细内容</span> -->
+                <button @click="del(item)">x</button>
+            </li>
+        </ul>
+    </div>
+    <script src="./todo.js"></script>
+</body>
+
+</html>
